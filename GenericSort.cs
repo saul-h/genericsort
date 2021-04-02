@@ -50,48 +50,55 @@ namespace GenericSort
         Console.WriteLine("{0}, {1}", p.Name, p.Age);
       }
       
+
+      Console.WriteLine("---------------");
+      Console.WriteLine("Sorted by name:");
+      Console.WriteLine("---------------");
+
       IEnumerable<Person> sortByName =
         from person in people
-        orderby person.Name
+        orderby person.Name ascending
         select person;
-      
-      Console.WriteLine("--------------");
-      Console.WriteLine("Sorted by name:");
-      Console.WriteLine("--------------");
+
       foreach (Person p in sortByName)
       {
         Console.WriteLine("{0}, {1}", p.Name, p.Age);
       }
 
-      IEnumerable<Person> sortByAge =
-        from person in people
-        orderby person.Age descending, person.Name ascending
-        select person;
 
       Console.WriteLine("--------------");
-      Console.WriteLine("Sorted by age (then by name):");
+      Console.WriteLine("Sorted by age (then alphabetically by name):");
       Console.WriteLine("--------------");
+      
+      IEnumerable<Person> sortByAge =
+        from person in sortByName     // use previous query that is already sorted by name
+        orderby person.Age descending // then sort by age
+        select person;
+      
       foreach (Person p in sortByAge)
       {
         Console.WriteLine("{1}, {0}", p.Name, p.Age);
       }
 
-      Console.WriteLine("--------------");
+
+      Console.WriteLine("-----------------");
       Console.WriteLine("Unsorted Numbers:");
-      Console.WriteLine("--------------");
+      Console.WriteLine("-----------------");
       foreach (double n in numbers)
       {
         Console.WriteLine(n);
       }
+
+
+      Console.WriteLine("---------------");
+      Console.WriteLine("Sorted Numbers:");
+      Console.WriteLine("---------------");
 
       IEnumerable<double> sortNumbersAscending =
         from number in numbers
         orderby number
         select number;
 
-      Console.WriteLine("--------------");
-      Console.WriteLine("Sorted Numbers:");
-      Console.WriteLine("--------------");
       foreach (double n in sortNumbersAscending)
       {
         Console.WriteLine(n);
