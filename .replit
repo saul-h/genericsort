@@ -1,2 +1,2 @@
-language = "undefined"
-run = "echo hello word"
+language = "csharp"
+run = "mcs GenericSort.cs && mono GenericSort.exe"
